@@ -4,7 +4,6 @@ import { Injectable } from '@angular/core';
 export class EthereumService {
   
   public address:any;
-  public events:string="";
 
   constructor() { }
 

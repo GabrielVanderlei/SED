@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { EthereumService } from './ethereum.service';
+import { EventService } from './event.service';
 
 @Component({
   selector: 'my-app',
@@ -8,7 +9,10 @@ import { EthereumService } from './ethereum.service';
 })
 
 export class AppComponent  {
-  constructor(public ethereumService:EthereumService){
+  constructor(
+    public ethereumService:EthereumService, 
+    public eventService:EventService
+    ){
     this.ethereumService.logIn();
   }
 }

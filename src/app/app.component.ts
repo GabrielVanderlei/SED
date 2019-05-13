@@ -14,6 +14,6 @@ export class AppComponent  {
     public eventService:EventService
     ){
     this.ethereumService.logIn();
-    this.eventService.getEvents();
+    this.eventService.createEvent();
   }
 }

@@ -4,8 +4,17 @@ import { Injectable } from '@angular/core';
 export class EthereumService {
   
   public address:any;
+  public contract:any;
 
   constructor() { }
+
+  loadContract (abi:any, contractAddress:any){
+    var web3:any = window["web3"];
+    var contractInit = web3.eth.contract(abi);
+    web3.eth.defaultAccount = web3.eth.accounts[0];
+    var contractInstance = contractInit.at(contractAddress);
+    this.contract = contractInstance;
+  }
 
   updateAddress(success,error){
     if(success){

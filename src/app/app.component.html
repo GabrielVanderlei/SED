@@ -1,6 +1,10 @@
 <header 
   name="{{ this.ethereumService.address }}"
   event="{{ this.eventService.address }}"></header>
-<p>
-  Dados do evento: {{this.eventService.events}}
-</p>
+<h1>Criar evento:</h1>
+<b>Nome</b><input #name />
+<input type="button" value="Criar" (click)="Event(
+  name.value
+)"/>
+<h1>Dados do evento:</h1>
+<b>Nome:</b>{{ this.eventService.name }}

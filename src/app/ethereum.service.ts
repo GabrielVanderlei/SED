@@ -10,8 +10,9 @@ export class EthereumService {
 
   loadContract (abi:any, contractAddress:any){
     var web3:any = window["web3"];
-    var contractInit = web3.eth.contract(abi);
     web3.eth.defaultAccount = web3.eth.accounts[0];
+    web3.personal.unlockAccount(web3.eth.defaultAccount, console.log);
+    var contractInit = web3.eth.contract(abi);
     var contractInstance = contractInit.at(contractAddress);
     this.contract = contractInstance;
   }

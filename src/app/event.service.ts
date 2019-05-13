@@ -13,6 +13,8 @@ export class EventService {
 
   constructor() { }
 
+  setName(value){this.name=value};
+
   createEvent(){
     this.contractService.build();
     this.contractService.contract.create(
@@ -20,7 +22,12 @@ export class EventService {
       this.description,
       this.location,
       this.begin,
-      this.end
-    ).then(console.log);
+      this.end,
+      console.log);
+  }
+
+  loadEventData(){
+    this.contractService.contract.getNome((err, result) =>{ 
+      if(!err) this.name = result });
   }
 }

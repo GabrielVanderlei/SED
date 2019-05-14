@@ -11,12 +11,13 @@ export class EventService {
   public end:any = "15/05/2019 00:00";
   public contractService:any = new ContractService();
 
-  constructor() { }
+  constructor() {
+    this.contractService.build();
+ }
 
   setName(value){this.name=value};
 
   createEvent(){
-    this.contractService.build();
     this.contractService.contract.create(
       this.name,
       this.description,

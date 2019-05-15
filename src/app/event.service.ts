@@ -4,7 +4,7 @@ import { ContractService } from './contract.service';
 @Injectable()
 export class EventService {
 
-  public name:any = "Meu Evento";
+  public name:any = "Carregando...";
   public description:any = "Um evento de testes";
   public location:any = "Brasil";
   public begin:any = "13/05/2019 00:00";
@@ -28,7 +28,8 @@ export class EventService {
   }
 
   loadEventData(){
+    
     this.contractService.contract.getNome((err, result) =>{ 
-      if(!err) this.name = result });
+      if(!err){ this.name = result;alert("a") }});
   }
 }

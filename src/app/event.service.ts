@@ -10,6 +10,7 @@ export class EventService {
   public begin:any = "13/05/2019 00:00";
   public end:any = "15/05/2019 00:00";
   public contractService:any = new ContractService();
+  public address:any = "a";
 
   constructor() {
     this.contractService.build();

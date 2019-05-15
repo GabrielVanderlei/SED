@@ -33,6 +33,7 @@ export class EthereumService {
   }
 
   logIn(){
+      alert("a");
     var ethereum:any = window["ethereum"];
     
    // Modern dapp browsers...

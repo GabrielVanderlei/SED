@@ -6,7 +6,9 @@ export class EthereumService {
   public address:any;
   public contract:any;
 
-  constructor() { }
+  constructor() { 
+    this.logIn();
+  }
 
   loadContract (abi:any, contractAddress:any){
     var web3:any = window["web3"];
@@ -33,14 +35,12 @@ export class EthereumService {
   }
 
   logIn(){
-      alert("a");
     var ethereum:any = window["ethereum"];
     
    // Modern dapp browsers...
     if (ethereum) {
         try {
-            ethereum.enable()
-            .then((success, error)=>{this.updateAddress(success, error)});
+            ethereum.enable().then((success, error)=>{this.updateAddress(success, error)});
         } catch (error) {
             // User denied account access...
             console.log(error)

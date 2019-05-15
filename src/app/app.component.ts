@@ -9,14 +9,10 @@ import { EventService } from './event.service';
 })
 
 export class AppComponent  {
-  public eventService:EventService;
-  public ethereumService:EthereumService;
+  public eventService = new EventService();
+  public ethereumService = new EthereumService();
   
   constructor(){
-    this.eventService = new EventService();
-    this.ethereumService = new EthereumService();
-    
-    this.ethereumService.logIn();
     this.eventService.loadEventData();
     //this.eventService.createEvent();
     

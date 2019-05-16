@@ -1,15 +1,27 @@
-pragma solidity ^0.4.11;
+pragma solidity ^0.4.24;
 
 contract Event{
 	
-  bool configurated = false;
-
+  address owner;
 	string nome;
 	string description;
 	string location;
 	string begin;
 	string end;
-  address[] subscriptions;
+
+  struct Subscription {
+    address subsAddr;
+    string description;
+    bool valid;
+  }
+  
+  Subscription[] subscriptions;
+
+  event SubscriptionAdded(uint indexed id, address subsAddr, string description);
+
+  constructor() public {
+      owner = msg.sender;
+  }
 
 	function create(
 	    string _nome,
@@ -19,13 +31,14 @@ contract Event{
 	    string _end
 	    ) public{
 
-    if(!configurated){
-      nome = _nome;
-      description = _description;
-      location = _location;
-      begin = _begin;
-      end = _end;
-    }
+    if(msg.sender != owner)
+      return;
+
+    nome = _nome;
+    description = _description;
+    location = _location;
+    begin = _begin;
+    end = _end;
 	}
 
 	function getNome() public constant returns (string){ return nome; }
@@ -33,7 +46,13 @@ contract Event{
 	function getLocation() public constant returns (string){ return location; }
 	function getBegin() public constant returns (string){ return begin; }
 	function getEnd() public constant returns (string){ return end; }
-	function getSubscriptions() public constant returns (address[]){ return subscriptions; }
+	function getSubscriptions(uint _index) public constant returns (address, string){ 
+	    return (subscriptions[_index].subsAddr, subscriptions[_index].description); 
+	}
   
-  function addSubscription(address _addr) public{subscriptions.push(_addr);}
+  function addSubscription(address _addr, string _description) public{
+    Subscription memory subs = Subscription(_addr, _description, true);
+    uint id = subscriptions.push(subs) - 1;
+    emit SubscriptionAdded(id, _addr, _description);
+  }
 }

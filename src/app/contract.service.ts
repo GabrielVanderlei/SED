@@ -7,7 +7,7 @@ export class ContractService {
   public eventInstance:any;
   public ethereumService:any = new EthereumService();
   public contract:any;
-  public waddress:any;
+  public waddress:any;//
   public eventAbi:any = [
 	{
 		"constant": false,

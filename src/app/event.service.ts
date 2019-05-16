@@ -15,7 +15,7 @@ export class EventService {
 
   constructor() {
     this.contractService.build();
- }
+  }
 
   setName(value){this.name=value};
   setDescription(value){this.description=value};
@@ -35,12 +35,12 @@ export class EventService {
         this.updating(ref);
         
         if(!e){ 
-          this.setAddress(s);
           var m = setInterval(()=>{
             var web3 = window["web3"];
             web3.eth.getTransaction(s, (e,s) => {
               if(s != null){
                 if(s.blockNumber != null){
+                  this.setAddress(s.blockHash);
                   setTimeout(()=>{this.loadEventData(ref)},5000);
                   clearInterval(m);
                 }

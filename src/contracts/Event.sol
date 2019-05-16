@@ -2,13 +2,15 @@ pragma solidity ^0.4.11;
 
 contract Event{
 	
+  bool configurated = false;
+
 	string nome;
 	string description;
 	string location;
 	string begin;
 	string end;
   address[] subscriptions;
-	
+
 	function create(
 	    string _nome,
 	    string _description,
@@ -16,11 +18,14 @@ contract Event{
 	    string _begin,
 	    string _end
 	    ) public{
-		nome = _nome;
-		description = _description;
-		location = _location;
-		begin = _begin;
-		end = _end;
+
+    if(!configurated){
+      nome = _nome;
+      description = _description;
+      location = _location;
+      begin = _begin;
+      end = _end;
+    }
 	}
 
 	function getNome() public constant returns (string){ return nome; }
@@ -28,6 +33,7 @@ contract Event{
 	function getLocation() public constant returns (string){ return location; }
 	function getBegin() public constant returns (string){ return begin; }
 	function getEnd() public constant returns (string){ return end; }
-
-  function addSubscription(address addr){subscriptions.push(addr);}
+	function getSubscriptions() public constant returns (address[]){ return subscriptions; }
+  
+  function addSubscription(address _addr) public{subscriptions.push(_addr);}
 }

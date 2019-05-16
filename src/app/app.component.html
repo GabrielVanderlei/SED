@@ -24,8 +24,12 @@
   begin.value,
   end.value
 )"/>
-
+<h1>Se inscrever no evento</h1><br/>
+<input type="button" value="Se inscrever" (click)="Subscribe()"/>
 <h1>Dados do evento:</h1>
+<b>Dono:</b><br />
+{{ this.eventService.owner }}
+<br />
 <b>Nome:</b><br />
 {{ this.eventService.name }}
 <br />
@@ -40,3 +44,8 @@
 <br />
 <b>Fim:</b><br />
 {{ this.eventService.end }}
+
+<h1>Inscritos no evento</h1>
+<ul>
+  <li *ngFor="let subscript of this.eventService.subscripts">{{subscript.address}}</li>
+</ul>

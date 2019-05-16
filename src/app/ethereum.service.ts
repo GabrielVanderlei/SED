@@ -27,7 +27,6 @@ export class EthereumService {
 
       // Acccounts now exposed
       // Acccounts always exposed
-      abi= JSON.parse('[{"constant":true,"inputs":[],"name":"getNome","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_novoNome","type":"string"}],"name":"setNome","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[{"name":"_start","type":"string"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"}]');
       web3.eth.defaultAccount = web3.eth.accounts[0] 
       this.address = web3.eth.defaultAccount;
     //HelloContract = web3.eth.contract(abi);

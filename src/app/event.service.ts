@@ -12,6 +12,8 @@ export class EventService {
   public end:any;
   public contractService:any = new ContractService();
   public address:any;
+  public walletAddress:any;
+  public subscripts:any = [{address:"a"}];
 
   constructor() {
     this.contractService.build();
@@ -23,6 +25,7 @@ export class EventService {
   setBegin(value){this.begin=value};
   setEnd(value){this.end=value};
   setAddress(value){this.address=value};
+  setWAddress(value){this.walletAddress=value};
 
   createEvent(ref:ChangeDetectorRef){
     this.contractService.contract.create(
@@ -31,7 +34,10 @@ export class EventService {
       this.location,
       this.begin,
       this.end,
-      (e,s) => {
+      (e,s)=>{this.updateData(ref,e,s)});
+  }
+
+  updateData(ref:ChangeDetectorRef, e,s) {
         this.updating(ref);
         
         if(!e){ 
@@ -48,8 +54,7 @@ export class EventService {
             });
           }, 1000);
         }
-      });
-  }
+      };
 
   updating(ref:ChangeDetectorRef){
     var loading = "Carregando...";
@@ -86,5 +91,29 @@ export class EventService {
     this.contractService.contract.getEnd((err, result) => { 
         if(!err){ this.setEnd(result);this.view(ref);}
     });
+
+    var index = 0;
+    this.subscripts = [];
+
+    var localizeSubs = () => {
+      this.contractService.contract.getSubscriptions(index, (err, result) => { 
+        if(!err){ 
+          if(result != null){
+            this.subscripts.push(result);
+            this.view(ref);
+            index++;
+            localizeSubs();
+          }
+        }
+      });
+    }
+  }
+
+  subscribe(ref:ChangeDetectorRef){
+    console.log(this.contractService.waddress);
+    this.contractService.contract.addSubscription(
+      this.contractService.waddress,
+      "s",
+      (e,s)=>{this.updateData(ref,e,s)});
   }
 }

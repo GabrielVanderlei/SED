@@ -3,11 +3,31 @@ import { EthereumService } from './ethereum.service';
 
 @Injectable()
 export class ContractService {
-  public eventContract:any = "0x1cb4012d338eda0f8966819beb6e3e269b45e116";
+  public eventContract:any = "0x4fe9111ae02850f1c46170d569e4c76f211effc5";
   public eventInstance:any;
   public ethereumService:any = new EthereumService();
   public contract:any;
-  public eventAbi:any = [{
+  public waddress:any;
+  public eventAbi:any = [
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_addr",
+				"type": "address"
+			},
+			{
+				"name": "_description",
+				"type": "string"
+			}
+		],
+		"name": "addSubscription",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
 		"constant": false,
 		"inputs": [
 			{
@@ -34,8 +54,36 @@ export class ContractService {
 		"name": "create",
 		"outputs": [],
 		"payable": false,
-		"type": "function",
-		"stateMutability": "nonpayable"
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"name": "id",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "subsAddr",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"name": "description",
+				"type": "string"
+			}
+		],
+		"name": "SubscriptionAdded",
+		"type": "event"
 	},
 	{
 		"constant": true,
@@ -48,8 +96,8 @@ export class ContractService {
 			}
 		],
 		"payable": false,
-		"type": "function",
-		"stateMutability": "view"
+		"stateMutability": "view",
+		"type": "function"
 	},
 	{
 		"constant": true,
@@ -62,8 +110,8 @@ export class ContractService {
 			}
 		],
 		"payable": false,
-		"type": "function",
-		"stateMutability": "view"
+		"stateMutability": "view",
+		"type": "function"
 	},
 	{
 		"constant": true,
@@ -76,8 +124,8 @@ export class ContractService {
 			}
 		],
 		"payable": false,
-		"type": "function",
-		"stateMutability": "view"
+		"stateMutability": "view",
+		"type": "function"
 	},
 	{
 		"constant": true,
@@ -90,8 +138,8 @@ export class ContractService {
 			}
 		],
 		"payable": false,
-		"type": "function",
-		"stateMutability": "view"
+		"stateMutability": "view",
+		"type": "function"
 	},
 	{
 		"constant": true,
@@ -104,9 +152,33 @@ export class ContractService {
 			}
 		],
 		"payable": false,
-		"type": "function",
-		"stateMutability": "view"
-	}];
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_index",
+				"type": "uint256"
+			}
+		],
+		"name": "getSubscriptions",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			},
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	}
+];
   
   constructor() { }
 
@@ -115,6 +187,7 @@ export class ContractService {
       this.eventAbi, 
       this.eventContract);
       
+      this.waddress = this.ethereumService.address;
       this.contract = this.ethereumService.contract;
   }
 

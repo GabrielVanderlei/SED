@@ -36,4 +36,8 @@ export class AppComponent  {
     this.eventService.setEnd(end);
     this.eventService.createEvent(this.ref);  
   }
+
+  Subscribe(){
+    this.eventService.subscribe(this.ref);
+  }
 }

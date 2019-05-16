@@ -68,6 +68,7 @@ export class EventService {
   }
 
   view(ref:ChangeDetectorRef){
+    this.walletAddress = this.contractService.waddress;
     ref.detectChanges();
   }
 
@@ -96,10 +97,15 @@ export class EventService {
     this.subscripts = [];
 
     var localizeSubs = () => {
+      console.log(index);
       this.contractService.contract.getSubscriptions(index, (err, result) => { 
         if(!err){ 
+          console.log(result);
           if(result != null){
-            this.subscripts.push(result);
+            this.subscripts.push({
+              address: result[0],
+              description: result[1]
+            });
             this.view(ref);
             index++;
             localizeSubs();
@@ -107,6 +113,8 @@ export class EventService {
         }
       });
     }
+    
+    localizeSubs();
   }
 
   subscribe(ref:ChangeDetectorRef){

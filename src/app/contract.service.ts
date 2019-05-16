@@ -185,10 +185,11 @@ export class ContractService {
   build(){
     this.ethereumService.loadContract(
       this.eventAbi, 
-      this.eventContract);
-      
-      this.waddress = this.ethereumService.address;
-      this.contract = this.ethereumService.contract;
+      this.eventContract,
+      (a) => {
+        this.waddress = a;
+        this.contract = this.ethereumService.contract;
+      });
   }
 
 }

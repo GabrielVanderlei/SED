@@ -2,9 +2,41 @@
   name="{{ this.ethereumService.address }}"
   event="{{ this.eventService.address }}"></header>
 <h1>Criar evento:</h1>
-<b>Nome</b><input #name />
+<b>Nome:</b><br />
+<input #name />
+<br />
+<b>Descrição:</b><br />
+<input #description />
+<br />
+<b>Local:</b><br />
+<input #location />
+<br />
+<b>Início:</b><br />
+<input #begin />
+<br />
+<b>Fim:</b><br />
+<input #end />
+<br />
 <input type="button" value="Criar" (click)="Event(
-  name.value
+  name.value,
+  description.value,
+  location.value,
+  begin.value,
+  end.value
 )"/>
+
 <h1>Dados do evento:</h1>
-<b>Nome:</b>{{ this.eventService.name }}
+<b>Nome:</b><br />
+{{ this.eventService.name }}
+<br />
+<b>Descrição:</b><br />
+{{ this.eventService.description }}
+<br />
+<b>Local:</b><br />
+{{ this.eventService.location }}
+<br />
+<b>Início:</b><br />
+{{ this.eventService.begin }}
+<br />
+<b>Fim:</b><br />
+{{ this.eventService.end }}

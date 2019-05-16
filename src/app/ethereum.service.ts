@@ -37,7 +37,7 @@ export class EthereumService {
   logIn(){
     var ethereum:any = window["ethereum"];
     
-   // Modern dapp browsers...
+   // Modern dapp browsers..
     if (ethereum) {
         try {
             ethereum.enable().then((success, error)=>{this.updateAddress(success, error)});

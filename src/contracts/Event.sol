@@ -7,6 +7,7 @@ contract Event{
 	string location;
 	string begin;
 	string end;
+  address[] subscriptions;
 	
 	function create(
 	    string _nome,
@@ -27,4 +28,6 @@ contract Event{
 	function getLocation() public constant returns (string){ return location; }
 	function getBegin() public constant returns (string){ return begin; }
 	function getEnd() public constant returns (string){ return end; }
+
+  function addSubscription(address addr){subscriptions.push(addr);}
 }

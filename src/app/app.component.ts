@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { EthereumService } from './ethereum.service';
 import { EventService } from './event.service';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'my-app',
@@ -11,15 +12,28 @@ import { EventService } from './event.service';
 export class AppComponent  {
   public eventService = new EventService();
   public ethereumService = new EthereumService();
+
+  public eventName = "Carregando...";
+  public ref:any;
   
-  constructor(){
-    this.eventService.loadEventData();
-    //this.eventService.createEvent();
-    
+  constructor(ref:ChangeDetectorRef){
+    this.ref = ref;
+    this.eventService.loadEventData(ref);
+    //this.eventService.createEvent(); 
   }
 
-  Event(name){
+  Event(
+    name,
+    description,
+    location,
+    begin,
+    end
+    ){
     this.eventService.setName(name);
-    this.eventService.createEvent();  
+    this.eventService.setDescription(description);
+    this.eventService.setLocation(location);
+    this.eventService.setBegin(begin);
+    this.eventService.setEnd(end);
+    this.eventService.createEvent(this.ref);  
   }
 }
